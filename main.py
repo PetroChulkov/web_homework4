@@ -64,7 +64,7 @@ class HttpHandler(BaseHTTPRequestHandler):
 
 
 def run(server_class=HTTPServer, handler_class=HttpHandler):
-    server_address = ('0.0.0.0', 3000)
+    server_address = ('', 3000)
 
     http = server_class(server_address, handler_class)
     try:
@@ -106,11 +106,6 @@ def run_socket_server(ip, port):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format="%(threadName)s %(message)s")
-    STORAGE_DIR = pathlib.Path().joinpath('storage')
-    FILE_STORAGE = STORAGE_DIR / 'data.json'
-    if not FILE_STORAGE.exists():
-        with open(FILE_STORAGE, 'w', encoding='utf-8') as fd:
-            json.dump({}, fd, ensure_ascii=False)
 
     thread_server = Thread(target=run)
     thread_server.start()
